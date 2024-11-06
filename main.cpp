@@ -6,8 +6,8 @@ using namespace std;
 // Node class for chaining in case of overflow
 class Node {
 public:
-    string value;
     string key;
+    string value;
     Node* next;
 
     Node(const string& key, const string& value) : key(key), value(value), next(nullptr) {}
