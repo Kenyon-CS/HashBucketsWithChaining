@@ -189,11 +189,15 @@ void loadFromCSV(const string& filename, HashMap& hashMap) {
 // Driver function to test the HashMap
 int main() {
     int bucketSize;
+    int buckets;
     cout << "Enter bucket size: ";
     cin >> bucketSize;
     cin.ignore();
+    cout << "Enter number of buckets: ";
+    cin >> buckets;
+    cin.ignore();
 
-    HashMap hashMap(30, bucketSize); // Create a HashMap with 10 buckets
+    HashMap hashMap(buckets, bucketSize); // Create a HashMap with 10 buckets
 
     // Load key-value pairs from CSV
     string filename;
