@@ -22,7 +22,7 @@ class HashBucket {
     int maxSize; // Max size of the bucket
 
 public:
-    HashBucket(int maxSize) : maxSize(maxSize), overflowHead(nullptr) {}
+    HashBucket(int maxSize) : overflowHead(nullptr), maxSize(maxSize)  {}
 
     // Insert a key-value pair
     void insert(const string& key, const string& value) {
