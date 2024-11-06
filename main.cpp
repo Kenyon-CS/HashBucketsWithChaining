@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -16,15 +18,15 @@ public:
 // HashBucket class representing a single bucket
 class HashBucket {
     vector<pair<string, string>> entries; // Fixed-size bucket
-    int maxSize; // Max size of the bucket
     Node* overflowHead; // Head of the linked list for overflow entries
+    int maxSize; // Max size of the bucket
 
 public:
     HashBucket(int maxSize) : maxSize(maxSize), overflowHead(nullptr) {}
 
     // Insert a key-value pair
     void insert(const string& key, const string& value) {
-        if ((int) entries.size() < maxSize) {
+        if (entries.size() < maxSize) {
             entries.emplace_back(key, value);
         } else {
             // Use chaining for overflow
@@ -112,7 +114,7 @@ public:
 class HashMap {
     vector<HashBucket*> table;
     int capacity;
-    int bucketSize=0;
+    int bucketSize;
 
     // Hash function for strings
     int hashCode(const string& key) const {
@@ -165,13 +167,39 @@ public:
     }
 };
 
+// Function to load key-value pairs from a CSV file into the hash map
+void loadFromCSV(const string& filename, HashMap& hashMap) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Error: Could not open file " << filename << endl;
+        return;
+    }
+
+    string line, key, value;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        if (getline(ss, key, ',') && getline(ss, value)) {
+            hashMap.insert(key, value);
+        }
+    }
+    file.close();
+    cout << "Data loaded from " << filename << " successfully." << endl;
+}
+
 // Driver function to test the HashMap
 int main() {
     int bucketSize;
     cout << "Enter bucket size: ";
     cin >> bucketSize;
+    cin.ignore();
 
     HashMap hashMap(10, bucketSize); // Create a HashMap with 10 buckets
+
+    // Load key-value pairs from CSV
+    string filename;
+    cout << "Enter CSV filename to load: ";
+    getline(cin, filename);
+    loadFromCSV(filename, hashMap);
 
     int choice;
     string key, value;
@@ -179,18 +207,19 @@ int main() {
     while (true) {
         cout << "\n1. Insert, 2. Retrieve, 3. Delete, 4. Display, 5. Exit: ";
         cin >> choice;
+        cin.ignore();
 
         switch (choice) {
             case 1:
                 cout << "Enter key (string): ";
-                cin >> key;
+                getline(cin, key);
                 cout << "Enter value (string): ";
-                cin >> value;
+                getline(cin, value);
                 hashMap.insert(key, value);
                 break;
             case 2:
                 cout << "Enter key to retrieve (string): ";
-                cin >> key;
+                getline(cin, key);
                 value = hashMap.get(key);
                 if (!value.empty()) {
                     cout << "Value: " << value << endl;
@@ -200,7 +229,7 @@ int main() {
                 break;
             case 3:
                 cout << "Enter key to delete (string): ";
-                cin >> key;
+                getline(cin, key);
                 if (hashMap.remove(key)) {
                     cout << "Key deleted successfully." << endl;
                 } else {
