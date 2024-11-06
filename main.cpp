@@ -26,7 +26,7 @@ public:
 
     // Insert a key-value pair
     void insert(const string& key, const string& value) {
-        if (entries.size() < maxSize) {
+        if ((int)entries.size() < maxSize) {
             entries.emplace_back(key, value);
         } else {
             // Use chaining for overflow
