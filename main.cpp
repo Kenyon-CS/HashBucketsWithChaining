@@ -111,8 +111,8 @@ public:
 // HashMap class using buckets with chaining
 class HashMap {
     vector<HashBucket*> table;
-    int bucketSize=0;
     int capacity;
+    int bucketSize=0;
 
     // Hash function for strings
     int hashCode(const string& key) const {
