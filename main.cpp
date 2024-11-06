@@ -12,7 +12,7 @@ public:
     string key;
     Node* next;
 
-    Node(const string& key, const string& value) : key(key), value(value), next(nullptr) {}
+    Node(const string& key, const string& value) : value(value), key(key), next(nullptr) {}
 };
 
 // HashBucket class representing a single bucket
