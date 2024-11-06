@@ -111,6 +111,7 @@ public:
 // HashMap class using buckets with chaining
 class HashMap {
     vector<HashBucket*> table;
+    int bucketSize=0;
     int capacity;
 
     // Hash function for strings
