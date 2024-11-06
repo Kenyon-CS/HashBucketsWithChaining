@@ -193,7 +193,7 @@ int main() {
     cin >> bucketSize;
     cin.ignore();
 
-    HashMap hashMap(10, bucketSize); // Create a HashMap with 10 buckets
+    HashMap hashMap(30, bucketSize); // Create a HashMap with 10 buckets
 
     // Load key-value pairs from CSV
     string filename;
