@@ -16,8 +16,8 @@ public:
 // HashBucket class representing a single bucket
 class HashBucket {
     vector<pair<string, string>> entries; // Fixed-size bucket
-    Node* overflowHead; // Head of the linked list for overflow entries
     int maxSize; // Max size of the bucket
+    Node* overflowHead; // Head of the linked list for overflow entries
 
 public:
     HashBucket(int maxSize) : maxSize(maxSize), overflowHead(nullptr) {}
