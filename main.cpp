@@ -112,7 +112,6 @@ public:
 class HashMap {
     vector<HashBucket*> table;
     int capacity;
-    int bucketSize;
 
     // Hash function for strings
     int hashCode(const string& key) const {
